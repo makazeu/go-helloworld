@@ -4,7 +4,6 @@ pipeline {
         go 'go1'
     }
     environment {
-        GO114MODULE = 'on'
         CGO_ENABLED = 0 
         GOPATH = "${JENKINS_HOME}/jobs/${JOB_NAME}/builds/${BUILD_ID}"
     }
@@ -12,21 +11,21 @@ pipeline {
         stage('Pre Test') {
             steps {
                 echo 'Installing dependencies'
-                sh 'go version'
+                bat 'go version'
             }
         }
         
         stage('Build') {
             steps {
                 echo 'Compiling and building'
-                sh 'go build'
+                bat 'go build'
             }
         }
 
         stage('Test') {
             steps {
                 echo 'Running test'
-                sh 'go test -v'
+                bat 'go test -v'
             }
         }
     } 
